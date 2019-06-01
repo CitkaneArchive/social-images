@@ -1,22 +1,30 @@
-'use strict';
-
 const path = require('path');
 const express = require('express');
+
 const app = express();
 const http = require('http').createServer(app);
-var zmq = require('zmq');
+const zmq = require('zmq');
 
-const sock = zmq.socket('pull');
- 
-sock.connect('tcp://192.168.0.104:4000');
-console.log('Worker connected to port 4000');
- 
-sock.on('message', function(msg){
-  console.log('work: %s', msg.toString());
-});
+const reqResPort = 4000;
 
-app.use("/", express.static(path.join(__dirname, 'public')));
+function makeResponder() {
+  const responder = zmq.socket('router');
+  responder.bindSync(`tcp://127.0.0.1:${reqResPort}`);
 
-http.listen(3010, function(){
+  responder.on('message', (...args) => {
+    const identity = args[0];
+    const message = args[2].toString();
+    console.log(message);
+    setTimeout(() => {
+      responder.send([identity, '', `response: ${message}`]);
+    }, 1000);
+  });
+}
+
+makeResponder();
+
+app.use('/', express.static(path.join(__dirname, 'public')));
+
+http.listen(3010, () => {
   console.log('listening on *:3010');
 });

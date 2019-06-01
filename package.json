@@ -11,5 +11,10 @@
   "dependencies": {
     "express": "^4.17.1",
     "zmq": "^2.15.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3"
   }
 }
