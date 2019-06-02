@@ -1,15 +1,14 @@
 const path = require('path');
 const express = require('express');
+const ports = require('@social/social-deployment/topology/portMaps');
 
 const app = express();
 const http = require('http').createServer(app);
 const zmq = require('zmq');
 
-const reqResPort = 4000;
-
 function makeResponder() {
     const responder = zmq.socket('router');
-    responder.bindSync(`tcp://127.0.0.1:${reqResPort}`);
+    responder.bindSync(`tcp://127.0.0.1:${ports.images.crud}`);
 
     responder.on('message', (...args) => {
         const identity = args[0];

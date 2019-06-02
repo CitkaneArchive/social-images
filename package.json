@@ -9,6 +9,7 @@
   "author": "Michael Jonker",
   "license": "UNLICENSED",
   "dependencies": {
+    "@social/social-deployment": "git+https://git@github.com/citkane/social-deployment.git",
     "express": "^4.17.1",
     "zmq": "^2.15.3"
   },
