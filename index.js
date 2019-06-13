@@ -1,5 +1,10 @@
 /* eslint-disable import/order */
 /* eslint-disable prefer-promise-reject-errors */
+const config = require('config');
+
+// eslint-disable-next-line no-underscore-dangle
+global.__network = config.get('network');
+
 const path = require('path');
 const express = require('express');
 const ports = require('@social/social-deployment/topology/portMaps');
@@ -35,7 +40,7 @@ sockets.makeResponder(apiInterface);
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
-http.listen(ports.images.static);
+http.listen(ports.images.static, __network.host);
 
 /*
 const path = require('path');
