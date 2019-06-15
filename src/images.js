@@ -8,8 +8,8 @@ global.__network = config.get('network');
 const path = require('path');
 const express = require('express');
 const ports = require('@social/social-deployment/topology/portMaps');
-const Sockets = require('../social-deployment/templates/nodejs/api/Sockets');
-const Api = require('./src/api/Api');
+const Sockets = require('../../social-deployment/templates/nodejs/api/Sockets');
+const Api = require('./api/Api');
 
 const app = express();
 const http = require('http').createServer(app);
