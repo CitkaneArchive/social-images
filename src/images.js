@@ -3,7 +3,7 @@
 const config = require('config');
 const path = require('path');
 const express = require('express');
-const Sockets = require('../../social-deployment/templates/nodejs/api/Sockets');
+const Sockets = require('./templates/Sockets');
 const Api = require('./api/Api');
 
 const app = express();
